@@ -32,7 +32,7 @@ export default function Home({ posts }) {
 }
 
 // get datas from API
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const posts = await fetch(
     "https://jsonplaceholder.typicode.com/posts?_limit=4"
   ).then((response) => response.json());

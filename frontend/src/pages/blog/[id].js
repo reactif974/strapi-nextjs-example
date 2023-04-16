@@ -12,7 +12,7 @@ export default function Post({ post }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.id}`
   ).then((response) => response.json());
@@ -22,18 +22,4 @@ export async function getStaticProps({ params }) {
       post,
     },
   };
-}
-
-// get all pages ids
-export async function getStaticPaths() {
-  const posts = await fetch(
-    "https://jsonplaceholder.typicode.com/posts?_limit=4"
-  ).then((response) => response.json());
-
-  const paths = posts.map((post) => ({
-    params: { id: post.id.toString() },
-  }));
-
-  // call fallback if id no exist - false call 404 page
-  return { paths, fallback: false };
 }
